@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - AU</title>
+
+
+    <link href="https://cdn.kendostatic.com/2021.3.1109/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.kendostatic.com/2021.3.1109/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1109/styles/kendo.blueopal.min.css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/jquery.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/jszip.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/kendo.all.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/kendo.aspnetmvc.min.js"></script>
+
+
+</head>
+
+
+<body>
+     
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>*@
+                    <img src="~/Logo/uvlogo.png" width="60" height="40"/>
+                    @Html.ActionLink("Annamalai University - Controller of Examinations [ Computer Wing ] -  PORTAL", "Index", "Home", null, new { @class = "title" })
+                    
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </div>
+
+            @*<ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>*@
+
+
+        </div>
+     
+        <div class="container body-content">
+            <script>
+                $(document).ready(function () {
+                    kendo.culture("en-GB");
+
+                });
+
+            </script>
+
+
+
+
+            @Html.Partial("_MenuPartial")
+
+         @*   <h5 style="color:red"> Last Date for Internal & Practical Entry 17/06/2022 5.00 PM </h5>*@
+            @RenderBody()
+            <hr />
+            <footer>
+                @{
+                    if (!String.IsNullOrEmpty(ViewBag.Link))
+                    {
+                        <p class="text-danger">
+                            For local debug  only: confirmation link: <a href="@ViewBag.Link">link</a>
+                        </p>
+                    }
+                    if (!String.IsNullOrEmpty(ViewBag.Code))
+                    {
+                        <p class="text-danger">
+                            For local debug only: @ViewBag.Code
+                        </p>
+                    }
+                }
+                <p>&copy; @DateTime.Now.Year - <img src="/favicon.ico" class="test" alt="some_text"> - Designed by Computer Wing (Exam)</p>
+            </footer>
+
+        </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

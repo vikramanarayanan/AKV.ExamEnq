@@ -1,0 +1,41 @@
+﻿<div>
+
+    <h5>Select Paper</h5>
+    <br />
+    <select id="papselect" name="papselect" data-greaterdate-msg="" data-role="multiselect"
+            data-placeholder="Select Papers"
+            data-filter="contains"
+            data-text-field="papname1"
+            data-value-field="papname1"
+            data-auto-bind="false"
+            data-bind="{source: source, value: papers}"></select>
+    <input name="papers" type="hidden" data-bind="value: test1" />
+    <br />
+    <br />
+    
+        @*<label class="required">Exam Fee Paid(Yes/No)</label>
+        <br />
+        <input id="feepaid" name="feepaid" required />
+        <br />
+        <br />
+        <label for="examfee" class="required">Exam Fee Total Amount.:</label>
+        <br />
+
+        <input data-role="numerictextbox"
+               data-bind="
+                      value: examfee ">*@
+ 
+    <footer class="col-xs-12 form-group text-center">
+
+        <button id="Step1" type="submit" style="width:100px;height:50px;" data-bind="click: Step1" class="btn btn-info btn-lg"><strong>Save</strong></button>
+    </footer>
+</div>
+
+
+
+
+
+
+
+
+

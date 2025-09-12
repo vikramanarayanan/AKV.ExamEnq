@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ABSENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="COLLEGECODE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="6" Nullable="false" />
+          <Property Name="ROLLNO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="REGNO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SUB_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAP_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SEM_NO" Type="varchar2" MaxLength="1" />
+          <Property Name="REGU" Type="varchar2" MaxLength="1" />
+          <Property Name="STATUS" Type="number" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORYNAME" />
+          </Key>
+          <Property Name="CATEGORYNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COLLEGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COLLEGECODE" Type="varchar2" MaxLength="38" />
+          <Property Name="C_TYPE" Type="varchar2" MaxLength="26" />
+          <Property Name="DISTCODE" Type="varchar2" MaxLength="38" />
+          <Property Name="DISTNAME" Type="varchar2" MaxLength="26" />
+          <Property Name="ADDR1" Type="varchar2" MaxLength="128" />
+          <Property Name="ADDR2" Type="varchar2" MaxLength="128" />
+          <Property Name="ADDR3" Type="varchar2" MaxLength="128" />
+          <Property Name="ADDR4" Type="varchar2" MaxLength="128" />
+          <Property Name="ADDR5" Type="varchar2" MaxLength="128" />
+          <Property Name="ADDR6" Type="varchar2" MaxLength="128" />
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="38" />
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CRSMST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="38" />
+          <Property Name="COURSENAME" Type="varchar2" MaxLength="128" />
+          <Property Name="DURATION" Type="varchar2" MaxLength="38" />
+          <Property Name="UGPG" Type="varchar2" MaxLength="26" />
+          <Property Name="FACULTY" Type="varchar2" MaxLength="26" />
+          <Property Name="FINAL_SEM" Type="varchar2" MaxLength="38" />
+          <Property Name="TOKEN" Type="varchar2" MaxLength="38" />
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MARK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="COLLEGECODE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="6" Nullable="false" />
+          <Property Name="ROLLNO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="REGNO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SUB_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAP_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SES" Type="number" Precision="38" Scale="0" />
+          <Property Name="EXT" Type="number" Precision="38" Scale="0" />
+          <Property Name="OPAP_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="SEM_NO" Type="varchar2" MaxLength="1" />
+          <Property Name="REGU" Type="varchar2" MaxLength="1" />
+          <Property Name="OPT" Type="varchar2" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="PAPERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="5" />
+          <Property Name="ROLLNO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAP_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="SEM_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAPNAME1" Type="varchar2" MaxLength="200" />
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PASSWORD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="USERS" Type="varchar2" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="8" />
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REVALUATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="COLLEGECODE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="6" Nullable="false" />
+          <Property Name="ROLLNO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="REGNO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SUB_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAP_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SEM_NO" Type="varchar2" MaxLength="1" />
+          <Property Name="REGU" Type="varchar2" MaxLength="1" />
+          <Property Name="STATUS" Type="number" Precision="1" Scale="0" />
+          <Property Name="NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="OPT" Type="varchar2" MaxLength="2" />
+          <Property Name="TAG" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ROLL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="4" />
+          <Property Name="COLLEGECODE" Type="varchar2" MaxLength="3" />
+          <Property Name="NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="SEX" Type="varchar2" MaxLength="15" />
+          <Property Name="COMMUNITY" Type="varchar2" MaxLength="5" />
+          <Property Name="MEDIUM" Type="varchar2" MaxLength="20" />
+          <Property Name="PAPERS" Type="varchar2" MaxLength="2000" />
+          <Property Name="PHOTO" Type="blob" />
+          <Property Name="ROLLNO" Type="varchar2" MaxLength="20" />
+          <Property Name="REGNO" Type="varchar2" MaxLength="20" />
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="MOBILENO" Type="varchar2" MaxLength="10" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="1" />
+          <Property Name="ARREAR" Type="varchar2" MaxLength="2000" />
+          <Property Name="RSTATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="20" />
+          <Property Name="EXAMFEE" Type="number" Precision="38" Scale="0" />
+          <Property Name="PAIDORNOT" Type="varchar2" MaxLength="20" />
+          <Property Name="REGU" Type="varchar2" MaxLength="20" />
+          <Property Name="SEM_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="DEMAND" Type="number" Precision="38" Scale="0" />
+          <Property Name="PAID" Type="number" Precision="38" Scale="0" />
+          <Property Name="UNIQUEREFNUMBER" Type="varchar2" MaxLength="100" />
+          <Property Name="TRANSACTIONDATE" Type="varchar2" MaxLength="50" />
+          <Property Name="DUE" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="SUBMST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="varchar2" MaxLength="6" />
+          <Property Name="PAP_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAPNAME1" Type="varchar2" MaxLength="100" />
+          <Property Name="ID" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="OPT" Type="varchar2" MaxLength="1" />
+          <Property Name="SUB_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="EXTMAX" Type="number" Precision="38" Scale="0" />
+          <Property Name="SESMAX" Type="number" Precision="38" Scale="0" />
+          <Property Name="PRAC" Type="varchar2" MaxLength="1" />
+          <Property Name="REGU" Type="varchar2" MaxLength="1" />
+          <Property Name="SEM_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PAPFEES" Type="varchar2" MaxLength="6" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ABSENT" EntityType="Self.ABSENT" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="COLLEGE" EntityType="Self.COLLEGE" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="CRSMST" EntityType="Self.CRSMST" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="MARK" EntityType="Self.MARK" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="PAPERS" EntityType="Self.PAPERS" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="PASSWORD" EntityType="Self.PASSWORD" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="REVALUATION" EntityType="Self.REVALUATION" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="ROLL" EntityType="Self.ROLL" Schema="COLLEGE" store:Type="Tables" />
+          <EntitySet Name="SUBMST" EntityType="Self.SUBMST" Schema="COLLEGE" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ABSENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COLLEGECODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COURSECODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROLLNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REGNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUB_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAP_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SEM_NO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="REGU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORYNAME" />
+          </Key>
+          <Property Name="CATEGORYNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COLLEGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COLLEGECODE" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="C_TYPE" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+          <Property Name="DISTCODE" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="DISTNAME" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+          <Property Name="ADDR1" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="ADDR2" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="ADDR3" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="ADDR4" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="ADDR5" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="ADDR6" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="COURSECODE" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CRSMST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="COURSENAME" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="DURATION" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="UGPG" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+          <Property Name="FACULTY" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+          <Property Name="FINAL_SEM" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="TOKEN" Type="String" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAPER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ROLLNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAP_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEM_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAPNAME1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PASSWORD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="USERS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD1" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REVALUATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COLLEGECODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COURSECODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROLLNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REGNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUB_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAP_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SEM_NO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="REGU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Boolean" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OPT" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="TAG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
+          <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+          <EntitySet Name="COLLEGEs" EntityType="Self.COLLEGE" />
+          <EntitySet Name="CRSMSTs" EntityType="Self.CRSMST" />
+          <EntitySet Name="PAPERS" EntityType="Self.PAPER" />
+          <EntitySet Name="PASSWORDs" EntityType="Self.PASSWORD" />
+          <EntitySet Name="REVALUATIONs" EntityType="Self.REVALUATION" />
+          <EntitySet Name="SUBMSTs" EntityType="Model.SUBMST" />
+          <EntitySet Name="MARKs" EntityType="Model.MARK" />
+          <EntitySet Name="ROLLs" EntityType="Model.ROLL" />
+        </EntityContainer>
+        <EntityType Name="SUBMST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="PAP_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAPNAME1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OPT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="SUB_NO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EXTMAX" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SESMAX" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PRAC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="REGU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="SEM_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PAPFEES" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MARK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="COLLEGECODE" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="COURSECODE" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ROLLNO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGNO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SUB_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAP_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EXT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OPAP_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEM_NO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="REGU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="OPT" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ROLL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="COURSECODE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="COLLEGECODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEX" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="COMMUNITY" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="MEDIUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAPERS" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ROLLNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILENO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ARREAR" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="RSTATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EXAMFEE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PAIDORNOT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGU" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEM_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DEMAND" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PAID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="UNIQUEREFNUMBER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSACTIONDATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DUE" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ABSENTs">
+            <EntityTypeMapping TypeName="Model.ABSENT">
+              <MappingFragment StoreEntitySet="ABSENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="COLLEGECODE" ColumnName="COLLEGECODE" />
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+                <ScalarProperty Name="ROLLNO" ColumnName="ROLLNO" />
+                <ScalarProperty Name="REGNO" ColumnName="REGNO" />
+                <ScalarProperty Name="SUB_NO" ColumnName="SUB_NO" />
+                <ScalarProperty Name="PAP_NO" ColumnName="PAP_NO" />
+                <ScalarProperty Name="SEM_NO" ColumnName="SEM_NO" />
+                <ScalarProperty Name="REGU" ColumnName="REGU" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORies">
+            <EntityTypeMapping TypeName="Model.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="CATEGORYNAME" ColumnName="CATEGORYNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COLLEGEs">
+            <EntityTypeMapping TypeName="Model.COLLEGE">
+              <MappingFragment StoreEntitySet="COLLEGE">
+                <ScalarProperty Name="COLLEGECODE" ColumnName="COLLEGECODE" />
+                <ScalarProperty Name="C_TYPE" ColumnName="C_TYPE" />
+                <ScalarProperty Name="DISTCODE" ColumnName="DISTCODE" />
+                <ScalarProperty Name="DISTNAME" ColumnName="DISTNAME" />
+                <ScalarProperty Name="ADDR1" ColumnName="ADDR1" />
+                <ScalarProperty Name="ADDR2" ColumnName="ADDR2" />
+                <ScalarProperty Name="ADDR3" ColumnName="ADDR3" />
+                <ScalarProperty Name="ADDR4" ColumnName="ADDR4" />
+                <ScalarProperty Name="ADDR5" ColumnName="ADDR5" />
+                <ScalarProperty Name="ADDR6" ColumnName="ADDR6" />
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRSMSTs">
+            <EntityTypeMapping TypeName="Model.CRSMST">
+              <MappingFragment StoreEntitySet="CRSMST">
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+                <ScalarProperty Name="COURSENAME" ColumnName="COURSENAME" />
+                <ScalarProperty Name="DURATION" ColumnName="DURATION" />
+                <ScalarProperty Name="UGPG" ColumnName="UGPG" />
+                <ScalarProperty Name="FACULTY" ColumnName="FACULTY" />
+                <ScalarProperty Name="FINAL_SEM" ColumnName="FINAL_SEM" />
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAPERS">
+            <EntityTypeMapping TypeName="Model.PAPER">
+              <MappingFragment StoreEntitySet="PAPERS">
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+                <ScalarProperty Name="ROLLNO" ColumnName="ROLLNO" />
+                <ScalarProperty Name="PAP_NO" ColumnName="PAP_NO" />
+                <ScalarProperty Name="SEM_NO" ColumnName="SEM_NO" />
+                <ScalarProperty Name="PAPNAME1" ColumnName="PAPNAME1" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PASSWORDs">
+            <EntityTypeMapping TypeName="Model.PASSWORD">
+              <MappingFragment StoreEntitySet="PASSWORD">
+                <ScalarProperty Name="USERS" ColumnName="USERS" />
+                <ScalarProperty Name="PASSWORD1" ColumnName="PASSWORD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REVALUATIONs">
+            <EntityTypeMapping TypeName="Model.REVALUATION">
+              <MappingFragment StoreEntitySet="REVALUATION">
+                <ScalarProperty Name="TAG" ColumnName="TAG" />
+                <ScalarProperty Name="OPT" ColumnName="OPT" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="COLLEGECODE" ColumnName="COLLEGECODE" />
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+                <ScalarProperty Name="ROLLNO" ColumnName="ROLLNO" />
+                <ScalarProperty Name="REGNO" ColumnName="REGNO" />
+                <ScalarProperty Name="SUB_NO" ColumnName="SUB_NO" />
+                <ScalarProperty Name="PAP_NO" ColumnName="PAP_NO" />
+                <ScalarProperty Name="SEM_NO" ColumnName="SEM_NO" />
+                <ScalarProperty Name="REGU" ColumnName="REGU" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBMSTs">
+            <EntityTypeMapping TypeName="Model.SUBMST">
+              <MappingFragment StoreEntitySet="SUBMST">
+                <ScalarProperty Name="PAPFEES" ColumnName="PAPFEES" />
+                <ScalarProperty Name="SEM_NO" ColumnName="SEM_NO" />
+                <ScalarProperty Name="REGU" ColumnName="REGU" />
+                <ScalarProperty Name="PRAC" ColumnName="PRAC" />
+                <ScalarProperty Name="SESMAX" ColumnName="SESMAX" />
+                <ScalarProperty Name="EXTMAX" ColumnName="EXTMAX" />
+                <ScalarProperty Name="SUB_NO" ColumnName="SUB_NO" />
+                <ScalarProperty Name="OPT" ColumnName="OPT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PAPNAME1" ColumnName="PAPNAME1" />
+                <ScalarProperty Name="PAP_NO" ColumnName="PAP_NO" />
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARKs">
+            <EntityTypeMapping TypeName="Model.MARK">
+              <MappingFragment StoreEntitySet="MARK">
+                <ScalarProperty Name="OPT" ColumnName="OPT" />
+                <ScalarProperty Name="REGU" ColumnName="REGU" />
+                <ScalarProperty Name="SEM_NO" ColumnName="SEM_NO" />
+                <ScalarProperty Name="OPAP_NO" ColumnName="OPAP_NO" />
+                <ScalarProperty Name="EXT" ColumnName="EXT" />
+                <ScalarProperty Name="SES" ColumnName="SES" />
+                <ScalarProperty Name="PAP_NO" ColumnName="PAP_NO" />
+                <ScalarProperty Name="SUB_NO" ColumnName="SUB_NO" />
+                <ScalarProperty Name="REGNO" ColumnName="REGNO" />
+                <ScalarProperty Name="ROLLNO" ColumnName="ROLLNO" />
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+                <ScalarProperty Name="COLLEGECODE" ColumnName="COLLEGECODE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLLs">
+            <EntityTypeMapping TypeName="Model.ROLL">
+              <MappingFragment StoreEntitySet="ROLL">
+                <ScalarProperty Name="DUE" ColumnName="DUE" />
+                <ScalarProperty Name="TRANSACTIONDATE" ColumnName="TRANSACTIONDATE" />
+                <ScalarProperty Name="UNIQUEREFNUMBER" ColumnName="UNIQUEREFNUMBER" />
+                <ScalarProperty Name="PAID" ColumnName="PAID" />
+                <ScalarProperty Name="DEMAND" ColumnName="DEMAND" />
+                <ScalarProperty Name="SEM_NO" ColumnName="SEM_NO" />
+                <ScalarProperty Name="REGU" ColumnName="REGU" />
+                <ScalarProperty Name="PAIDORNOT" ColumnName="PAIDORNOT" />
+                <ScalarProperty Name="EXAMFEE" ColumnName="EXAMFEE" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="RSTATUS" ColumnName="RSTATUS" />
+                <ScalarProperty Name="ARREAR" ColumnName="ARREAR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="MOBILENO" ColumnName="MOBILENO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="REGNO" ColumnName="REGNO" />
+                <ScalarProperty Name="ROLLNO" ColumnName="ROLLNO" />
+                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+                <ScalarProperty Name="PAPERS" ColumnName="PAPERS" />
+                <ScalarProperty Name="MEDIUM" ColumnName="MEDIUM" />
+                <ScalarProperty Name="COMMUNITY" ColumnName="COMMUNITY" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="COLLEGECODE" ColumnName="COLLEGECODE" />
+                <ScalarProperty Name="COURSECODE" ColumnName="COURSECODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

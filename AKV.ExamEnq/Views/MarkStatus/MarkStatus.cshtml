@@ -1,0 +1,47 @@
+﻿@using AKV.ExamEnq.Controllers
+@model  MarkStatusController.MarkstatusPoco
+@{
+    ViewBag.Title = "MarkStatus";
+}
+
+<h2>MarkStatus</h2>
+
+
+
+
+<div>
+    @{
+        <h3 style="text-align:center;color:blue;font:bold;">Mark Status</h3>
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th style="text-align:center">COLLEGECODE</th>
+                    <th style="text-align:center">COURSECODE</th>
+                    <th style="text-align:center">TOTAL</th>
+                    <th style="text-align:center">EXT_ENTERED</th>
+                    <th style="text-align:center">EXT_NULL</th>
+                    <th style="text-align:center">SES_NULL</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.marklist)
+                {
+                    <tr>
+                        <td style="text-align:center">@item.collegecode</td>
+                        <td style="text-align:center">@item.coursecode</td>
+                        <td style="text-align:center">@item.total</td>
+                        <td style="text-align:center">@item.ext_entered</td>
+                        <td style="text-align:center">@item.ext_null</td>
+                        <td style="text-align:center">@item.ses_null</td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+
+     
+       
+</div>

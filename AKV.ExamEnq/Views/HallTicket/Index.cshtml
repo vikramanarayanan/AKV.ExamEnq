@@ -1,0 +1,74 @@
+﻿@using AKV.ExamEnq.Models;
+@model RollViewModel
+
+<h4>Hall Ticket</h4>
+<hr />
+ 
+<table>
+
+    <tr>
+        <td style="padding:5px;">
+            <label>Course:</label>
+        </td>
+        <td>
+            @(Html.Kendo()
+                 .ComboBox()
+                 .HtmlAttributes(new { style = "width:350px" })
+                 .Name("CrsnameName")
+
+                 .DataTextField("coursename")
+                                 .DataValueField("coursecode")
+                 .Filter(FilterType.Contains)
+
+                                       //   .CascadeFrom("mroute")
+              .DataSource(source =>
+              {
+
+                  source.Read(read =>
+                  {
+                      read.Action("GetCourses", "RollGrid");
+                  });
+              })
+
+            )
+        </td>
+        <td>
+        </td>
+        <td>
+            <button id="reportbutton" type="submit" class="btn btn-success btn-sm"><strong>Submit</strong></button>
+        </td>
+
+    </tr>
+</table>
+@using (Html.BeginForm("HallTicketReport", "HallTicket", FormMethod.Post, new { id = "report", @class = "navbar-right", target = "_blank" }))
+{
+    @Html.HiddenFor(m => m.coursecode)
+
+}
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //kendo.culture("en-US");
+
+        $("#reportbutton").click(function () {
+
+            if ($("#CrsnameName").data("kendoComboBox").value() == "") {
+                alert("Select Course");
+                return;
+            }
+            $('#coursecode').val($("#CrsnameName").data("kendoComboBox").value());
+            $('#report').submit();
+        });
+
+
+    });
+
+</script>
+
+
+
+
+

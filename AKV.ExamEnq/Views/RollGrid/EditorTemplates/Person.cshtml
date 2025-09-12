@@ -1,0 +1,16 @@
+﻿@model Affiliated.Models.RollViewModel
+
+<div>
+    @Html.LabelFor(model => model.rollno)
+
+    @Html.EditorFor(model => model.rollno)
+    @Html.ValidationMessageFor(model => model.rollno)
+</div>
+<div>
+    @Html.LabelFor(model => model.name)
+
+    @Html.EditorFor(model => model.name)
+    @Html.ValidationMessageFor(model => model.name)
+</div>
+
+

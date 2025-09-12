@@ -1,0 +1,19 @@
+﻿
+ 
+@model object
+
+@(Html.Kendo().DropDownListFor(m => m)
+        .OptionLabel("Select Sub Route")
+
+                          .DataTextField("coursename")
+                      .DataValueField("coursecode")
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("GetCourses", "RollGrid"))
+                       .ServerFiltering(true);
+
+                  }) 
+
+)
+
+

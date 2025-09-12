@@ -1,0 +1,165 @@
+﻿@using Microsoft.AspNet.Identity
+<style type="text/css">
+    #menu > li.k-item > span.k-link {
+        color: blue !important;
+    }
+
+    .k-menu .k-popup .k-item .k-link {
+        color: blue;
+    }
+
+    .k-menu .k-state-selected > .k-link {
+        color: red;
+    }
+</style>
+<div class="megaStore">
+    @if (Request.IsAuthenticated)
+    {
+        if (User.Identity.GetUserName().Contains("REG"))
+        {
+            @(Html.Kendo().Menu()
+
+                                 .Name("menuregu") //The name of the menu is mandatory. It specifies the "id" attribute of the widget.
+                                 .SecurityTrimming(s => s.HideParent(true))
+                                    .Items(items =>
+                                    {
+
+                                        items.Add().Text("Entry")
+                                    .Items(children =>
+                                    {
+
+                                        children.Add().Text("Internal Mark Entry").Action("IndexRegu", "InternalEntry");
+                                        children.Add().Text("Practical Mark Entry").Action("IndexRegu", "PracticalEntry");
+                                       
+
+                                    });
+
+                                    }).Items(items =>
+                                    {
+
+                                        items.Add().Text("Mark Report")
+                                             .Items(children =>
+                                             {
+
+                                                 children.Add().Text("Intermal Mark Report").Action("InternalMarkReguReport", "MarkReport");
+                                                 children.Add().Text("Practical Mark Report").Action("ParacticalMarkReguReport", "MarkReport");
+                                                
+
+
+                                             });
+                                    })
+
+            )
+        }
+        else
+        {
+
+            @(Html.Kendo().Menu()
+
+                                 .Name("menu") //The name of the menu is mandatory. It specifies the "id" attribute of the widget.
+                                 .SecurityTrimming(s => s.HideParent(true))
+                                    .Items(items =>
+                                    {
+
+                                        items.Add().Text("Entry")
+                                    .Items(children =>
+                                    {
+                                        children.Add().Text("Exam New Registration(First Semester Only)").Action("index", "RollGrid");
+                                        children.Add().Text("Course Registration(Except First Semester)").Action("AppEntry", "AppEntry");
+                                        children.Add().Text("Internal Mark Entry").Action("index", "InternalEntry");
+                                        children.Add().Text("Theory Mark Entry").Action("index", "TheoryEntry");
+                                        children.Add().Text("Practical Mark Entry").Action("index", "PracticalEntry");
+                                        children.Add().Text("Absent Entry").Action("Index", "AbsentEntry");
+                                    });
+
+                                    })
+
+                                    .Items(items =>
+                                    {
+
+                                        items.Add().Text("Roll Report")
+                                             .Items(children =>
+                                             {
+
+                                                 children.Add().Text("Course Wise Strength").Action("CourseWiseStrCheckList", "CourseWiseStrReport").LinkHtmlAttributes(new { target = "blank" });
+                                                 children.Add().Text("Course Wise Paper Wise Strength").Action("CourseWisePaperStrCheckList", "CourseWiseStrReport").LinkHtmlAttributes(new { target = "blank" });
+
+
+
+                                             });
+                                    })
+                                    .Items(items =>
+                                    {
+
+                                        items.Add().Text("Mark Report")
+                                             .Items(children =>
+                                             {
+
+                                                 children.Add().Text("Intermal Mark Report").Action("InternalMarkReport", "MarkReport");
+                                                 children.Add().Text("Practical Mark Report").Action("ParacticalMarkReport", "MarkReport");
+                                                 children.Add().Text("Theory Mark Report").Action("TheoryMarkReport", "MarkReport");
+
+
+
+
+
+                                             });
+                                    })
+                                     .Items(items =>
+                                     {
+
+                                         items.Add().Text("Result Report")
+                                              .Items(children =>
+                                              {
+                                                  children.Add().Text("Result Gally Report").Action("GallySheetReport", "MarkReport");
+                                                  children.Add().Text("Revaluation Entry").Action("RevaluationEntry", "RevaluationEntry");
+                                                  children.Add().Text("Legend Report").Action("LegendReport", "MarkReport");
+
+                                              });
+                                     })
+                                    .Items(items =>
+                                    {
+
+                                        items.Add().Text("Hall Ticket")
+                                             .Items(children =>
+                                             {
+
+
+                                                 children.Add().Text("Roll [Regno Order]").Action("Index", "RollWithRegno");
+                                                 children.Add().Text("Roll [RollNo Order]").Action("Index1", "RollWithRegno");
+                                                 children.Add().Text("Hall Ticket").Action("Index", "HallTicket");
+
+
+
+                                             });
+                                    })
+                                    .Items(items =>
+                                    {
+
+                                        items.Add().Text("Attendance Sheet")
+                                             .Items(children =>
+                                             {
+
+                                                 children.Add().Text("Attendence").Action("AttendanceReport", "MarkReport");
+                                                 children.Add().Text("Absent Report").Action("AbsentReport", "MarkReport");
+
+                                             });
+                                    })
+                                     .Items(items =>
+                                    {
+
+                                        items.Add().Text("Roll Report")
+                                             .Items(children =>
+                                             {
+
+                                                 children.Add().Text("Course Wise Strength").Action("CourseWiseStrCheckList", "CourseWiseStrReport").LinkHtmlAttributes(new { target = "blank" });
+                                                 children.Add().Text("Course Wise Paper Wise Strength").Action("CourseWisePaperStrCheckList", "CourseWiseStrReport").LinkHtmlAttributes(new { target = "blank" });
+
+
+
+                                             });
+                                    })
+    )
+        }
+    }
+</div>

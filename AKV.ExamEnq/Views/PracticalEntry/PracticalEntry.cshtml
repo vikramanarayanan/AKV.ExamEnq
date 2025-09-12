@@ -1,0 +1,302 @@
+﻿@using AKV.ExamEnq.Models;
+@model MarkViewModel
+@{
+    ViewBag.Title = "Practical Mark Entry";
+}
+
+<h4>Practical Mark Entry</h4>
+
+<div id="window"></div>
+<style type="text/css">
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    .k-dialog .k-window-titlebar .k-dialog-title {
+        height: 0px;
+        visibility: hidden;
+    }
+</style>
+
+<table>
+
+    <tr>
+        <td style="padding:5px;">
+            <label>Course:</label>
+        </td>
+        <td>
+
+            @(Html.Kendo().ComboBoxFor(m => m.coursecode).HtmlAttributes(new { style = "width:500px" })
+                         .Name("CrsName")
+          .Placeholder("Select Course")
+              .DataTextField("coursename")
+              .DataValueField("coursecode")
+              .Filter(FilterType.Contains)
+          .DataSource(source =>
+          {
+
+              source.Read(read =>
+              {
+                  read.Action("GetCourses", "RollGrid");
+              });
+          }).Events(e => e.Change("selectrouteclose"))
+          )
+
+
+        </td>
+    </tr>
+
+    <tr>
+
+        <td style="padding:5px;">
+            <label>Paper:</label>
+        </td>
+        <td>
+
+            @(Html.Kendo().ComboBoxFor(m => m.pap_no).HtmlAttributes(new { style = "width:500px" })
+        .Name("papname")
+                      .Placeholder("Select Paper")
+                  .DataTextField("papname")
+                  .DataValueField("pap_no")
+                          .Filter(FilterType.Contains)
+
+              .DataSource(source =>
+              {
+
+                  source.Read(read =>
+                  {
+                      read.Action("GetPracticalPapers", "PracticalEntry").Data("filterCustomers");
+                  })
+                  .ServerFiltering(true);
+
+              }).Enable(false)
+                      .AutoBind(false)
+                 .CascadeFrom("CrsName")
+                 .Events(e => e.Change("selectrouteclose"))
+                            )
+            <script>
+                function filterCustomers() {
+                    return {
+                        rid: $("#CrsName").val(),
+                        namefilter: $("#papname").data("kendoComboBox").input.val()
+                    };
+                }
+            </script>
+
+        </td>
+        <td>
+        </td>
+        <td>
+            <button id="reportbutton" type="submit" class="btn btn-danger btn-sm"><strong>After Enter Mark, Press to Lock.</strong></button>
+        </td>
+    </tr>
+
+</table>
+@using (Html.BeginForm("PracTag", "PracticalEntry", FormMethod.Post, new { id = "report", @class = "navbar-right" }))
+{
+    @Html.HiddenFor(m => m.coursecode)
+    @Html.HiddenFor(m => m.pap_no)
+
+}
+<div>
+
+
+
+    @(Html.Kendo().Grid<MarkViewModel>
+    ()
+    .Name("grid")
+    .AutoBind(false)
+    .Navigatable()
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.id).Width(200).Title("ID").Visible(false);
+        columns.Bound(r => r.pap_no).Title("Pap_NO").Width(50);
+        columns.Bound(r => r.name).Title("Name").Width(75);
+        columns.Bound(r => r.regno).Title("Regno").Width(75);
+        columns.Bound(r => r.rollno).Title("Rollno").Width(55);
+
+        columns.Bound(r => r.ext).Title("Practical Mark").Width(50);
+
+    })
+
+    .Editable(editable => editable.Mode(GridEditMode.InCell))
+    .Pageable()
+    //   .Sortable()
+    //   .Filterable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:600px;width:800px; " })
+    .Events(events => events
+    .DataBound("databound")
+    .Save("save")
+    //.Navigate("onNavigate")
+    //   .Save("save")
+
+    )
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .AutoSync(true)
+    .PageSize(1000)
+    .Events(events => events.Error("c_Error"))
+
+    .Model( model => { model.Id(p => p.id);
+
+        model.Field(p => p.id).Editable(false);
+        model.Field(p => p.pap_no).Editable(false);
+        model.Field(p => p.rollno).Editable(false);
+        model.Field(p => p.regno).Editable(false);
+        model.Field(p => p.name).Editable(false);
+
+    })
+
+    // .Create(create => create.Action("CustomerCreate", "Customer"))
+    .Read(read => read.Action("ReadMark", "PracticalEntry").Data("addparameter"))
+    .Update(update => update.Action("UpdatePracticalMark", "PracticalEntry"))
+    //.Destroy(destory => destory.Action("CustomerDestroy", "Customer"))
+    )
+    )
+
+
+</div>
+
+
+<script type="text/javascript">
+    var extmax = 0;
+
+    $(document).ready(function () {
+
+        $("#reportbutton").click(function () {
+
+            if ($("#CrsName").data("kendoComboBox").value() == "") {
+                alert("Select Course");
+                return;
+            }
+            if ($("#papname").data("kendoComboBox").value() == "") {
+                alert("Select Paper No");
+                return;
+            }
+            //kendo.confirm("Confirm Paper to be Lock")
+            kendo.confirm("<div style='font-size: 24px; position: absolute; top: -4px'>Lock The Selected Paper</div><div style='padding-top: 12px'>Once locked you can't  view or Edit</div>")
+
+                .done(function () {
+                    var windowWidget = $("#window");
+                    kendo.ui.progress(windowWidget, true);
+                    $('#coursecode').val($("#CrsName").data("kendoComboBox").value());
+                    $('#pap_no').val($("#papname").data("kendoComboBox").value());
+                    $('#report').submit();
+                })
+                .fail(function () {
+                    /* The result can be observed in the DevTools(F12) console of the browser. */
+                    console.log("User rejected");
+                });
+
+
+        });
+
+
+        $.extend(true, kendo.ui.validator, {
+            rules: { // custom rules
+                productnamevalidation: function (input, params) {
+                    if (input.is("[name='ext']") && input.val() != "") {
+                        input.attr("data-productnamevalidation-msg", "Max " + extmax + " Mark!");
+                        return input.val() >= 0 && input.val() <= extmax;
+                    }
+
+                    return true;
+                }
+            },
+            messages: { //custom rules messages
+                productnamevalidation: function (input) {
+                    // return the message text
+                    return input.attr("data-val-productnamevalidation");
+                }
+            }
+        });
+    });
+
+    function save(e) {
+        lastEditIndex.row = this.tbody.children().index(e.container.parent());
+        lastEditIndex.col = e.container.parent().children().index(e.container);
+    }
+    var lastEditIndex;
+    function databound(e) {
+        if (!$.isEmptyObject(lastEditIndex)) {
+            var cell = this.tbody.children().eq(lastEditIndex.row + 1).children().eq(lastEditIndex.col);
+
+            this.current(cell);
+            this.table.focus();
+            this.editCell(cell);
+
+        }
+
+        lastEditIndex = {};
+    }
+    function addparameter(e) {
+
+        if ($("#papname").data("kendoComboBox").value() == "") {
+
+            alert("Select Paper");
+
+        }
+        if ($("#CrsName").data("kendoComboBox").value() == "") {
+
+            alert("Select Course");
+
+        }
+        var CB1 = $("#CrsName").data("kendoComboBox");
+        var description1 = CB1.dataItem(CB1.select());
+        var CB = $("#papname").data("kendoComboBox");
+        var description = CB.dataItem(CB.select());
+
+        extmax = description.extmax;
+        return {
+
+            course: description1.coursecode,
+            pap_no: description.pap_no
+        }
+    }
+    function selectrouteclose(e) {
+
+
+        var t1 = $("#papname").data().kendoComboBox.value();
+        var t2 = $("#papname").data().kendoComboBox.text();
+
+        if (t1 != t2) {
+
+            $("#grid").data("kendoGrid").dataSource.read();
+            // alert("asdf");
+
+        }
+        if (t1 == "") {
+            $("#grid").data("kendoGrid").dataSource.data([]);
+        }
+    }
+    c_Error = function (args) {
+
+        if (args.errors) {
+
+            var grid = $("#grid").data("kendoGrid");
+
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+                var message = "Errors:\n";
+                $.each(args.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                }); alert(message);
+            });
+
+
+        }
+
+
+    };
+</script>

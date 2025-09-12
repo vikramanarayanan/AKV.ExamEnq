@@ -1,0 +1,117 @@
+﻿@using AKV.ExamEnq.Models;
+@model RollViewModel
+@{
+    ViewBag.Title = "Absent Report";
+}
+
+<h4>Absent Report</h4>
+
+<hr />
+<table>
+
+    <tr>
+        <td style="padding:5px;">
+            <label>Course:</label>
+        </td>
+        <td>
+
+            @(Html.Kendo().ComboBoxFor(m => m.coursecode).HtmlAttributes(new { style = "width:500px" })
+                         .Name("CrsName")
+          .Placeholder("Select Course")
+              .DataTextField("coursename")
+              .DataValueField("coursecode")
+              .Filter(FilterType.Contains)
+          .DataSource(source =>
+          {
+
+              source.Read(read =>
+              {
+                  read.Action("GetCourses", "RollGrid");
+              });
+          })
+          )
+
+
+        </td>
+    </tr>
+
+    <tr>
+
+        <td style="padding:5px;">
+            <label>Paper:</label>
+        </td>
+        <td>
+
+
+            @(Html.Kendo().ComboBoxFor(m => m.pap_no).HtmlAttributes(new { style = "width:500px" })
+        .Name("papname")
+                      .Placeholder("Select Paper")
+                  .DataTextField("papname")
+                  .DataValueField("pap_no")
+                          .Filter(FilterType.Contains)
+
+              .DataSource(source =>
+              {
+
+                  source.Read(read =>
+                  {
+                      read.Action("GetAbsentPapers", "AbsentEntry").Data("filterCustomers");
+                  })
+                  .ServerFiltering(true);
+
+              }).Enable(false)
+                      .AutoBind(false)
+                 .CascadeFrom("CrsName")
+                 
+                            )
+            <script>
+                function filterCustomers() {
+                    return {
+                        rid: $("#CrsName").val(),
+                        namefilter: $("#papname").data("kendoComboBox").input.val()
+                    };
+                }
+            </script>
+
+        </td>
+        <td>
+        </td>
+        <td>
+            <button id="reportbutton" type="submit" class="btn btn-success btn-sm"><strong>Report</strong></button>
+        </td>
+    </tr>
+
+</table>
+@using (Html.BeginForm("AbsentReportData", "MarkReport", FormMethod.Post, new { id = "report", @class = "navbar-right", target = "_blank" }))
+{
+    @Html.HiddenFor(m => m.coursecode)
+    @Html.HiddenFor(m => m.pap_no)
+
+}
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //kendo.culture("en-US");
+
+        $("#reportbutton").click(function () {
+
+            if ($("#CrsName").data("kendoComboBox").value() == "") {
+                alert("Select Course");
+                return;
+            }
+            if ($("#papname").data("kendoComboBox").value() == "") {
+                alert("Select Paper No");
+                return;
+            }
+            $('#coursecode').val($("#CrsName").data("kendoComboBox").value());
+            $('#pap_no').val($("#papname").data("kendoComboBox").value());
+            $('#report').submit();
+        });
+
+
+    });
+
+</script>

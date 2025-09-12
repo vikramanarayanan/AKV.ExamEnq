@@ -1,0 +1,233 @@
+﻿@using AKV.ExamEnq.Models;
+@model AbsentViewModel
+@{
+    ViewBag.Title = "Absent Entry";
+}
+
+<h4>Absent Entry (Day Wise)</h4>
+
+
+<style type="text/css">
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+  
+<table>
+
+    <tr>
+        <td style="padding:5px;">
+            <label>Course:</label>
+        </td>
+        <td>
+
+            @(Html.Kendo().ComboBoxFor(m => m.coursecode).HtmlAttributes(new { style = "width:500px" })
+                         .Name("CrsName")
+          .Placeholder("Select Course")
+              .DataTextField("coursename")
+              .DataValueField("coursecode")
+              .Filter(FilterType.Contains)
+          .DataSource(source =>
+          {
+
+              source.Read(read =>
+              {
+                  read.Action("GetCourses", "RollGrid");
+              });
+          }).Events(e => e.Change("selectrouteclose"))
+          )
+
+
+        </td>
+    </tr>
+
+    <tr>
+
+        <td style="padding:5px;">
+            <label>Paper:</label>
+        </td>
+        <td>
+
+            @(Html.Kendo().ComboBoxFor(m => m.pap_no).HtmlAttributes(new { style = "width:500px" })
+        .Name("papname")
+                      .Placeholder("Select Paper")
+                  .DataTextField("papname")
+                  .DataValueField("pap_no")
+                          .Filter(FilterType.Contains)
+
+              .DataSource(source =>
+              {
+
+                  source.Read(read =>
+                  {
+                      read.Action("GetAbsentPapers", "AbsentEntry").Data("filterCustomers");
+                  })
+                  .ServerFiltering(true);
+
+              }).Enable(false)
+                      .AutoBind(false)
+                 .CascadeFrom("CrsName")
+                 .Events(e => e.Change("selectrouteclose"))
+                            )
+            <script>
+                function filterCustomers() {
+                    return {
+                        rid: $("#CrsName").val(),
+                        namefilter: $("#papname").data("kendoComboBox").input.val()
+                    };
+                }
+            </script>
+
+        </td>
+    </tr>
+
+</table>
+<div>
+
+
+
+    @(Html.Kendo().Grid<AbsentViewModel>
+    ()
+    .Name("grid")
+    .AutoBind(false)
+    .Navigatable()
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.id).Width(200).Title("ID").Visible(false);
+        columns.Bound(r => r.pap_no).Title("Pap_NO").Width(50);
+        columns.Bound(r => r.name).Title("Name").Width(75);
+        columns.Bound(r => r.regno).Title("Regno").Width(75);
+        columns.Bound(r => r.rollno).Title("Rollno").Width(75);
+        columns.Bound(r => r.status).Title("Absent (Double Click)").Width(100)
+        .ClientTemplate("<input type='checkbox'  #= status == 1 ? checked='checked' : '' # />");
+
+    })
+
+    .Editable(editable => editable.Mode(GridEditMode.InCell))
+    .Pageable()
+    //   .Sortable()
+    //   .Filterable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:600px;width:1000px; " })
+    .Events(events => events
+    .DataBound("databound")
+    .Save("save")
+    //.Navigate("onNavigate")
+    //   .Save("save")
+
+    )
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .AutoSync(true)
+    .PageSize(1000)
+    .Events(events => events.Error("c_Error"))
+
+    .Model( model => { model.Id(p => p.id);
+
+        model.Field(p => p.id).Editable(false);
+        model.Field(p => p.pap_no).Editable(false);
+        model.Field(p => p.rollno).Editable(false);
+        model.Field(p => p.regno).Editable(false);
+        model.Field(p => p.name).Editable(false);
+
+    })
+
+    // .Create(create => create.Action("CustomerCreate", "Customer"))
+    .Read(read => read.Action("ReadAbsent", "AbsentEntry").Data("addparameter"))
+    .Update(update => update.Action("UpdateAbsent", "AbsentEntry"))
+    //.Destroy(destory => destory.Action("CustomerDestroy", "Customer"))
+    )
+    )
+
+
+</div>
+
+
+<script type="text/javascript">
+    var sesmax = 0;
+
+    $(document).ready(function () {
+         
+    });
+
+    function save(e) {
+       // lastEditIndex.row = this.tbody.children().index(e.container.parent());
+      //  lastEditIndex.col = e.container.parent().children().index(e.container);
+    }
+    var lastEditIndex;
+    function databound(e) {
+        
+    }
+    function addparameter(e) {
+
+        if ($("#papname").data("kendoComboBox").value() == "") {
+
+            alert("Select Paper");
+
+        }
+        if ($("#CrsName").data("kendoComboBox").value() == "") {
+
+            alert("Select Course");
+
+        }
+        var CB1 = $("#CrsName").data("kendoComboBox");
+        var description1 = CB1.dataItem(CB1.select());
+        var CB = $("#papname").data("kendoComboBox");
+        var description = CB.dataItem(CB.select());
+
+        sesmax = description.sesmax;
+        return {
+
+            course: description1.coursecode,
+            pap_no: description.pap_no
+        }
+    }
+   
+    function selectrouteclose(e) {
+
+
+        var t1 = $("#papname").data().kendoComboBox.value();
+        var t2 = $("#papname").data().kendoComboBox.text();
+
+        if (t1 != t2) {
+
+            $("#grid").data("kendoGrid").dataSource.read();
+            // alert("asdf");
+
+        }
+        if (t1 == "") {
+            $("#grid").data("kendoGrid").dataSource.data([]);
+        }
+
+    }
+    c_Error = function (args) {
+
+        if (args.errors) {
+
+            var grid = $("#grid").data("kendoGrid");
+
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+                var message = "Errors:\n";
+                $.each(args.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                }); alert(message);
+            });
+
+
+        }
+
+
+    };
+</script>
