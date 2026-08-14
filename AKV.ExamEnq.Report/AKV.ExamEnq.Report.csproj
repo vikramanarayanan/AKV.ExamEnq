@@ -160,7 +160,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbsentReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>AbsentReport.cs</LastGenOutput>
+      <LastGenOutput>AbsentReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Attendance.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

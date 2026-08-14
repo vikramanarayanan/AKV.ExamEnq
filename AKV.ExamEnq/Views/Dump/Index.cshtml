@@ -1,0 +1,49 @@
+@model List<AKV.ExamEnq.Controllers.DumpController.DumpFileInfo>
+@{
+    ViewBag.Title = "Dump Files";
+}
+
+<h2 style="color:blue;">Dump Files</h2>
+<p>Files from <strong>@ViewBag.DumpFolder</strong></p>
+
+@if (Model == null || !Model.Any())
+{
+    <p class="text-warning">No files found in the dump folder.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered" style="width:100%; max-width:900px;">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th style="text-align:right;">Size</th>
+                <th>Last Modified</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var downloadUrl = Url.Content("~/dumpfile.ashx") + "?file=" + Uri.EscapeDataString(item.FileName);
+                <tr>
+                    <td>@item.FileName</td>
+                    <td style="text-align:right;">@FormatSize(item.SizeBytes)</td>
+                    <td>@item.LastModified.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a href="@downloadUrl">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    string FormatSize(long bytes)
+    {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return (bytes / 1024.0).ToString("0.##") + " KB";
+        if (bytes < 1024L * 1024 * 1024) return (bytes / (1024.0 * 1024)).ToString("0.##") + " MB";
+        return (bytes / (1024.0 * 1024 * 1024)).ToString("0.##") + " GB";
+    }
+}

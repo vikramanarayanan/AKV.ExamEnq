@@ -67,11 +67,11 @@ namespace AKV.ExamEnq.Controllers
             using (Entities et = new Entities())
             {
                 //November Exam
-                //rolres = et.Database.SqlQuery<EnrollPoco>($"select coursecode,coursename,collegecode,collegename,sem_no,regno ,rollno,name,nvl(demand,0)demand,photo from view_api_roll where ( rollno = '{regno}' or regno= '{regno}') and sem_no = '1' ").FirstOrDefault();
-                //papres = et.Database.SqlQuery<PaperPoco>($"select ROWNUM as slno,sem_no,pap_no,papname,papfee from view_api_papers where ( rollno = '{regno}' or regno= '{regno}')  ").ToList();
+                rolres = et.Database.SqlQuery<EnrollPoco>($"select coursecode,coursename,collegecode,collegename,sem_no,regno ,rollno,name,nvl(demand,0)demand,photo from view_api_roll where ( rollno = '{regno}' or regno= '{regno}') ").FirstOrDefault();
+                papres = et.Database.SqlQuery<PaperPoco>($"select ROWNUM as slno,sem_no,pap_no,papname,papfee from view_api_papers where ( rollno = '{regno}' or regno= '{regno}')  ").ToList();
                 //May Exam
-                rolres = et.Database.SqlQuery<EnrollPoco>($"select coursecode,coursename,collegecode,collegename,sem_no,regno ,rollno,name,nvl(demand,0)demand,photo from view_api_roll where ( regno= '{regno}')  ").FirstOrDefault();
-                papres = et.Database.SqlQuery<PaperPoco>($"select ROWNUM as slno,sem_no,pap_no,papname,papfee from view_api_papers where (  regno= '{regno}')  ").ToList();
+              //  rolres = et.Database.SqlQuery<EnrollPoco>($"select coursecode,coursename,collegecode,collegename,sem_no,regno ,rollno,name,nvl(demand,0)demand,photo from view_api_roll where ( regno= '{regno}')  ").FirstOrDefault();
+                //papres = et.Database.SqlQuery<PaperPoco>($"select ROWNUM as slno,sem_no,pap_no,papname,papfee from view_api_papers where (  regno= '{regno}')  ").ToList();
             }
             if (rolres != null)
             {
@@ -87,7 +87,7 @@ namespace AKV.ExamEnq.Controllers
                     name = rolres.name,
                     papers = papres!= null ? papres: null,
                     photo1 = rolres.photo1,
-                    regno = rolres.regno,
+                    regno = rolres.regno?? rolres.rollno,
                     sem_no = rolres.sem_no, 
                     rollno = rolres.rollno
 

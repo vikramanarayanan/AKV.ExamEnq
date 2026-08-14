@@ -13,7 +13,7 @@ namespace AKV.ExamEnq.Controllers
     public class AppEntryController : Controller
     {
         // GET: AppEntry
-      // [Authorize]
+    //   [Authorize]
        [Authorize(Users = "admin@aucoeexam.in")]
         public ActionResult AppEntry()
         {
@@ -21,6 +21,9 @@ namespace AKV.ExamEnq.Controllers
         }
         public ActionResult AppCheckList(string coursecode)
         {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+
             List<RollPoco> data = new List<RollPoco>();
             var ccode = CollegeRepository.GetLoginCollege();
             var cname = CollegeRepository.GetLoginCollegeName();
@@ -48,10 +51,10 @@ namespace AKV.ExamEnq.Controllers
                         rollno = item.ROLLNO,
                         sex = item.SEX,
                         status = item.STATUS,
-                      rstatus = item.RSTATUS,
-                      examfee=(decimal)item.EXAMFEE,
-                      paidornot = item.PAIDORNOT,
-                      regu = item.REGU
+                        rstatus = item.RSTATUS,
+                        examfee=(decimal)item.EXAMFEE,
+                        paidornot = item.PAIDORNOT,
+                        regu = item.REGU
                       
                       
 

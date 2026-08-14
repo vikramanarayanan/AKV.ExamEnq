@@ -12,6 +12,7 @@ namespace AKV.ExamEnq
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("dumpfile.ashx");
 
             routes.MapRoute(
                 name: "Default",

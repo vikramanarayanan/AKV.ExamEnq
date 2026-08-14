@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace Affiliated.Controllers
 {
-     [Authorize]
+    [Authorize]
 
    // [Authorize(Users = "tryvikraman@gmail.com")]
 
@@ -24,6 +24,8 @@ namespace Affiliated.Controllers
 
         public ActionResult RollCheckList(string coursecode)
         {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
             List<RollPoco> data = new List<RollPoco>();
             var ccode = CollegeRepository.GetLoginCollege();
             var cname = CollegeRepository.GetLoginCollegeName();
@@ -134,7 +136,7 @@ namespace Affiliated.Controllers
                 }
                 if (entity != null)
                 {
-                    et.Database.ExecuteSqlCommand("delete from papers where rollno = '" + entity.ROLLNO + "' ");
+                    et.Database.ExecuteSqlCommand("delete from papers where rollno = '" + entity.ROLLNO + "' and coursecode = '"+entity.COURSECODE+"' ");
                     entity.PAPERS = mpapers;
                     entity.EXAMFEE= 0;
                     entity.PAIDORNOT = "No";
@@ -192,6 +194,21 @@ namespace Affiliated.Controllers
             Image ret = Image.FromStream(ms);
             return ret;
         }
+        public static Image ResizeImage(Image originalImage, Size targetSize)
+        {
+            Bitmap resizedBitmap = new Bitmap(targetSize.Width, targetSize.Height);
+            using (Graphics graphics = Graphics.FromImage(resizedBitmap))
+            {
+                graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+                graphics.DrawImage(originalImage, 0, 0, targetSize.Width, targetSize.Height);
+            }
+            return resizedBitmap;
+        }
+
         public static byte[] ImageToByteArray(Image x)
         {
             ImageConverter _imageConverter = new ImageConverter();
@@ -219,8 +236,8 @@ namespace Affiliated.Controllers
                           using (var reader = new System.IO.BinaryReader(file.InputStream))
                             {
                                 var image = byteArrayToImage(reader.ReadBytes(file.ContentLength));
-                                var newimage = resizeImage(image, new Size(100, 120));
-                               var imagebyte = ImageToByteArray(newimage);
+                               // var newimage = ResizeImage(image, new Size(200, 220));// resizeImage(image, new Size(100, 120));
+                               var imagebyte = ImageToByteArray(image);
                                 entity.PHOTO = imagebyte;
                                 entity.STATUS = "1";
                                 test = imagebyte;

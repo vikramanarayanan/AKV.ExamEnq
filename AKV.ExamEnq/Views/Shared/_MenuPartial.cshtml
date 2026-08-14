@@ -159,6 +159,10 @@
 
                                              });
                                     })
+                                    .Items(items =>
+                                    {
+                                        items.Add().Text("Dump Files").Action("Index", "Dump");
+                                    })
     )
         }
     }

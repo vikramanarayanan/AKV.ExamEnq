@@ -22,8 +22,8 @@ namespace AKV.ExamEnq.Models
                 
                 if (!string.IsNullOrEmpty(namefilter))
                 {
-                    string q = "select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'    and (pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) like upper('%" + namefilter + "%') order by substr(pap_no,-2) ";
-                    //string q = "select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'  and sem_no in (select sem_no from roll where mark.regno = regno )  and (pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) like upper('%" + namefilter + "%') order by substr(pap_no,-2) ";
+                    //string q = "select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'    and (pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) like upper('%" + namefilter + "%') order by substr(pap_no,-2) ";
+                    string q = "select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'  and sem_no in (select sem_no from roll where mark.regno = regno )  and (pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) like upper('%" + namefilter + "%') order by substr(pap_no,-2) ";
                     var res = et.Database.SqlQuery<MarkViewModel>(q).ToList();
                     //result = result.Where(x => x.c_name.ToLower().Contains(namefilter.ToLower()));
                     foreach (var item in res)
@@ -33,8 +33,8 @@ namespace AKV.ExamEnq.Models
                 }
                 else
                 {
-                    //var res = et.Database.SqlQuery<MarkViewModel>("select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'  and sem_no in (select sem_no from roll where mark.regno = regno ) order by  substr(pap_no,-2) ").ToList();
-                    var res = et.Database.SqlQuery<MarkViewModel>("select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'   order by  substr(pap_no,-2) ").ToList();
+                    var res = et.Database.SqlQuery<MarkViewModel>("select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'  and sem_no in (select sem_no from roll where mark.regno = regno ) order by  substr(pap_no,-2) ").ToList();
+                   // var res = et.Database.SqlQuery<MarkViewModel>("select distinct pap_no,(pap_no ||' '||f_papname_withopt(coursecode,pap_no,regu)) papname,F_SESMAX(COURSECODE,PAP_NO,REGU) sesmax,F_EXTMAX(COURSECODE,PAP_NO,REGU) extmax from mark where collegecode = '" + ccode + "' and coursecode =   '" + course + "'   order by  substr(pap_no,-2) ").ToList();
                     foreach (var item in res)
                     {
                         list.Add(new MarkViewModel { pap_no = item.pap_no, papname = item.papname, sesmax = item.sesmax, extmax = item.extmax });

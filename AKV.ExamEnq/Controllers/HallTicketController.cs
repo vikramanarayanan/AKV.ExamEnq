@@ -10,9 +10,9 @@ using System.Web.Mvc;
 
 namespace AKV.ExamEnq.Controllers
 {
-   [Authorize(Users = "tryvikraman@gmail.com")]
+   //[Authorize(Users = "tryvikraman@gmail.com")]
     
- //  [Authorize]
+     [Authorize]
     public class HallTicketController : Controller
     {
         // GET: HallTicket
@@ -25,6 +25,9 @@ namespace AKV.ExamEnq.Controllers
 
         public ActionResult HallTicketReport(string coursecode)
         {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+
             List<HallTicketPoco> data = new List<HallTicketPoco>();
             var ccode = CollegeRepository.GetLoginCollege();
             var cname = CollegeRepository.GetLoginCollegeName();

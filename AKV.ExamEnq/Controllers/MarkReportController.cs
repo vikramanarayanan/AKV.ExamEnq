@@ -10,14 +10,14 @@ using System.Web.Mvc;
 
 namespace AKV.ExamEnq.Controllers
 {
-     [Authorize]
+   [Authorize]
  // [Authorize(Users = "tryvikraman@gmail.com")]
 
     public class MarkReportController : Controller
     {
         // GET: MarkReport
-       //  [Authorize]
-        [Authorize(Users = "tryvikraman@gmail.com")]
+
+        [Authorize]
         public ActionResult InternalMarkReport()
         {
             return View();
@@ -32,12 +32,12 @@ namespace AKV.ExamEnq.Controllers
         {
             return View();
         }
-        [Authorize(Users = "tryvikraman@gmail.com")]
+        [Authorize]
         public ActionResult AbsentReport()
         {
             return View();
         }
-        [Authorize(Users = "tryvikraman@gmail.com")]
+        [Authorize]
         public ActionResult ParacticalMarkReport()
         {
             return View();
@@ -57,7 +57,7 @@ namespace AKV.ExamEnq.Controllers
         {
             return View("GallySheetReport");
         }
-        [Authorize(Users = "tryvikraman@gmail.com")]
+        [Authorize]
         public ActionResult AttendanceReport()
         {
             return View();
@@ -67,7 +67,7 @@ namespace AKV.ExamEnq.Controllers
         {
             return View();
         }
-        [Authorize]
+      
         public ActionResult AttenanceReportDownload(string coursecode)
         {
 

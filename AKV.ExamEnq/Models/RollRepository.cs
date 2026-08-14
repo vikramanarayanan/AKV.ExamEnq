@@ -93,7 +93,7 @@ namespace AKV.ExamEnq.Models
         public IEnumerable<RollViewModel> GenerateCustomersByridRegnoOrder(string coursecode, string namefilter)
         {
             var ccourse = CollegeRepository.GetLoginCollege();
-            var result = new Entities().ROLLs.Where(x => x.COURSECODE == coursecode && x.COLLEGECODE == ccourse && string.IsNullOrEmpty(x.RSTATUS) ).ToList().Select(t => new RollViewModel
+            var result = new Entities().ROLLs.Where(x => x.COURSECODE == coursecode && x.COLLEGECODE == ccourse && string.IsNullOrEmpty(x.RSTATUS) &&  !string.IsNullOrEmpty(x.REGNO)).ToList().Select(t => new RollViewModel
             {
                 coursecode = t.COURSECODE,
                 rollno = t.ROLLNO,

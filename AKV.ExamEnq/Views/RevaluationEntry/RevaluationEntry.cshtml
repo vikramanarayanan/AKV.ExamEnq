@@ -23,6 +23,7 @@
 <table>
 
     <tr>
+        
         <td style="padding:5px;">
             <label>Course:</label>
         </td>
@@ -112,10 +113,10 @@
     .Columns(columns =>
     {
         columns.Bound(p => p.id).Width(200).Title("ID").Visible(false);
-        columns.Bound(r => r.pap_no).Title("Pap_NO").Width(50);
-        columns.Bound(r => r.name).Title("Name").Width(75);
-        columns.Bound(r => r.regno).Title("Regno").Width(55);
-        columns.Bound(r => r.rollno).Title("Rollno").Width(55);
+        columns.Bound(r => r.pap_no).Title("Pap_NO").Width(70);
+        columns.Bound(r => r.name).Title("Name").Width(100);
+        columns.Bound(r => r.regno).Title("Regno").Width(100);
+        columns.Bound(r => r.rollno).Title("Rollno").Width(75);
         columns.Bound(r => r.status).Title("Revaluation (Double Click)").Width(100)
         .ClientTemplate("<input type='checkbox'  #= status == 1 ? checked='checked' : '' # />");
 

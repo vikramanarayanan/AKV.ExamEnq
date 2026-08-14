@@ -13,8 +13,8 @@ namespace AKV.ExamEnq.Controllers
     public class InternalEntryController : Controller
     {
         // GET: InternalEntry
-     [Authorize(Users = "tryvikraman@gmail.com")]
-       // [Authorize]
+        [Authorize(Users = "tryvikraman@gmail.com")]
+       //  [Authorize]
         public ActionResult Index()
         {
             return View("InternalEntry");

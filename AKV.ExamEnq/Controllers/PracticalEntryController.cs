@@ -9,13 +9,13 @@ using System.Web.Mvc;
 
 namespace AKV.ExamEnq.Controllers
 {
-    [Authorize]
-  //[Authorize(Users = "tryvikraman@gmail.com")]
+    //[Authorize]
+  [Authorize]
     public class PracticalEntryController : Controller
     {
         // GET: PracticalEntry
       [Authorize(Users = "tryvikraman@gmail.com")]
-       // [Authorize]
+      //  [Authorize]
         public ActionResult Index()
         {
             return View("PracticalEntry");

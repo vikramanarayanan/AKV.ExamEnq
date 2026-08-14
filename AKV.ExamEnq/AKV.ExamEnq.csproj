@@ -226,6 +226,8 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AppEntryController.cs" />
     <Compile Include="Controllers\CourseWiseStrReportController.cs" />
+    <Compile Include="Controllers\DumpController.cs" />
+    <Compile Include="Handlers\FastDumpHandler.cs" />
     <Compile Include="Controllers\HallTicketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InternalEntryController.cs" />
@@ -398,6 +400,8 @@
     <Content Include="Views\AbsentEntry\Index.cshtml" />
     <Content Include="Views\MarkReport\AbsentReport.cshtml" />
     <Content Include="Views\RevaluationEntry\RevaluationEntry.cshtml" />
+    <Content Include="dumpfile.ashx" />
+    <Content Include="Views\Dump\Index.cshtml" />
     <Content Include="Views\MarkStatus\MarkStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
