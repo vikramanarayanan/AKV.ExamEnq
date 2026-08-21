@@ -15,8 +15,8 @@ namespace AKV.ExamEnq.Controllers
     public class RevaluationEntryController : Controller
     {
         // GET: RevaluationEntry
-        //  [Authorize]
-        [Authorize(Users = "tryvikraman@gmail.com")]
+         [Authorize]
+     //   [Authorize(Users = "tryvikraman@gmail.com")]
         public ActionResult RevaluationEntry()
         {
             return View();
