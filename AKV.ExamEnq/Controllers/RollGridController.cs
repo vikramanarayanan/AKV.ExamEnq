@@ -74,8 +74,8 @@ namespace Affiliated.Controllers
         }
 
         // GET: RollGrid
-       [Authorize(Users = "tryvikraman@gmail.com")]
-     //  [Authorize]
+     //  [Authorize(Users = "tryvikraman@gmail.com")]
+       [Authorize]
         public ActionResult Index()
         {
             // TempData["id"] = Guid.NewGuid().ToString();

@@ -12,7 +12,7 @@ namespace AKV.ExamEnq.Report
 
         public string demand { get; set; }
         public string paid { get; set; }
-      
+        public string venname { get; set; }
         public string coursecode { get; set; }
         public string collegecode { get; set; }
         public string collegename { get; set; }

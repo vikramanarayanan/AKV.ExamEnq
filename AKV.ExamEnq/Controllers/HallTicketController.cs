@@ -36,7 +36,7 @@ namespace AKV.ExamEnq.Controllers
             using (Entities et = new Entities())
             {
                  
-        var result = et.Database.SqlQuery<HallTicketPoco>("SELECT to_char(nvl(demand,0))demand, to_char(nvl(paid,0))paid,coursecode,collegecode,regno,regu,rollno,name, to_char(nvl(sem_no,0))sem_no,pap_no,opt,community,medium,mobileno,status sub_no,prac,edate,ses,papname1 FROM VIEW_HALLAFF where collegecode = '" + ccode + "' and coursecode =   '" + coursecode + "' and nvl(paid,0) > 0  order by regu,substr(regno,-3),to_date(edate,'dd/mm/yy'),ses ").ToList();
+        var result = et.Database.SqlQuery<HallTicketPoco>("SELECT venname,to_char(nvl(demand,0))demand, to_char(nvl(paid,0))paid,coursecode,collegecode,regno,regu,rollno,name, to_char(nvl(sem_no,0))sem_no,pap_no,opt,community,medium,mobileno,status sub_no,prac,edate,ses,papname1 FROM VIEW_HALLAFF where collegecode = '" + ccode + "' and coursecode =   '" + coursecode + "' and nvl(paid,0) > 0  order by regu,substr(regno,-3),to_date(edate,'dd/mm/yy'),ses ").ToList();
                 string regno = string.Empty;
                 int r = 0;
                 foreach (var item in result)
@@ -53,6 +53,7 @@ namespace AKV.ExamEnq.Controllers
                     
                     data.Add(new HallTicketPoco
                     {
+                        venname = item.venname,
                         collegecode = ccode,
                         collegename = ccode + "-" + cname,
                         community = item.community,

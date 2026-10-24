@@ -13,8 +13,8 @@ namespace AKV.ExamEnq.Controllers
     public class AppEntryController : Controller
     {
         // GET: AppEntry
-    //   [Authorize]
-       [Authorize(Users = "admin@aucoeexam.in")]
+       [Authorize]
+     //  [Authorize(Users = "admin@aucoeexam.in")]
         public ActionResult AppEntry()
         {
             return View();
