@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -224,7 +224,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\AffAppController.cs" />
     <Compile Include="Controllers\AppEntryController.cs" />
+    <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CourseWiseStrReportController.cs" />
     <Compile Include="Controllers\DumpController.cs" />
     <Compile Include="Handlers\FastDumpHandler.cs" />
@@ -253,6 +255,9 @@
     <Compile Include="Models\CrsmstViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\AffAppRepository.cs" />
+    <Compile Include="Models\AffAppViewModels.cs" />
+    <Compile Include="Models\EazypayService.cs" />
     <Compile Include="Models\AbsentRepository.cs" />
     <Compile Include="Models\MarkRepository.cs" />
     <Compile Include="Models\AbsentViewModel.cs" />
@@ -297,6 +302,8 @@
     <Content Include="Logo\back_AU.jpg" />
     <Content Include="Logo\cut.jpg" />
     <Content Include="Logo\CW.png" />
+    <Content Include="Logo\icicibank.png" />
+    <Content Include="Logo\top2.jpg" />
     <Content Include="Logo\cwfooter.png" />
     <Content Include="Logo\EXAMLOGO.png" />
     <Content Include="Logo\EXAMLOGO1.png" />
@@ -339,6 +346,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_AffAppLayout.cshtml" />
+    <Content Include="Views\AffApp\_ViewStart.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -401,6 +410,11 @@
     <Content Include="Views\MarkReport\AbsentReport.cshtml" />
     <Content Include="Views\RevaluationEntry\RevaluationEntry.cshtml" />
     <Content Include="dumpfile.ashx" />
+    <Content Include="Views\AffApp\Index.cshtml" />
+    <Content Include="Views\AffApp\Receipt.cshtml" />
+    <Content Include="Views\AffApp\RedirectToBank.cshtml" />
+    <Content Include="Views\AffApp\AppStatus.cshtml" />
+    <Content Include="Views\Bank\ReturnUrl.cshtml" />
     <Content Include="Views\Dump\Index.cshtml" />
     <Content Include="Views\MarkStatus\MarkStatus.cshtml" />
   </ItemGroup>

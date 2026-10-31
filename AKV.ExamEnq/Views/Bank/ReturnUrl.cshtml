@@ -1,0 +1,60 @@
+@model AKV.ExamEnq.Models.AffAppBankReturnVm
+@{
+    ViewBag.Title = "Bank Return";
+    Layout = "~/Views/Shared/_AffAppLayout.cshtml";
+}
+<style>
+    .pkt { white-space: pre-wrap; word-break: break-all; padding: 12px; border: 1px solid #ccc; font-family: Consolas, monospace; }
+    .pkt-plain { background: #e8f5e9; }
+    .pkt-enc { background: #fff3e0; }
+</style>
+<div class="alert alert-danger">
+    <h3 style="margin-top:0;">ICICI eazypay did not open the payment page</h3>
+    <p><strong>Response_Code:</strong> @(string.IsNullOrEmpty(Model.responseCode) ? "(empty)" : Model.responseCode)</p>
+    <p><strong>Meaning:</strong> @Model.responseMeaning</p>
+    <p><strong>Our Reference No:</strong> @(string.IsNullOrEmpty(Model.refno) ? "(empty)" : Model.refno)</p>
+    <p><strong>Bank status:</strong> @Model.bankStatus</p>
+</div>
+
+<h4>1. Before encryption</h4>
+<pre class="pkt pkt-plain">@(string.IsNullOrEmpty(Model.sentPlainUrl) ? "(empty)" : Model.sentPlainUrl)</pre>
+
+<h4>2. After encryption</h4>
+<pre class="pkt pkt-enc">@(string.IsNullOrEmpty(Model.sentEncUrl) ? "(empty)" : Model.sentEncUrl)</pre>
+
+<h4>3. mandatory fields before encryption</h4>
+<pre class="pkt pkt-plain">refno|submerchantid|pgamount|stname|regno|uid|fcode|mob|email
+@(string.IsNullOrEmpty(Model.sentMandatory) ? "(empty)" : Model.sentMandatory)</pre>
+
+<table class="table table-bordered" style="max-width:900px;">
+    <tr><th>HTTP method</th><td>@Model.httpMethod</td></tr>
+    <tr><th>Return URL</th><td>@Model.requestUrl</td></tr>
+    <tr><th>Browser Referer</th><td>@(string.IsNullOrEmpty(Model.referrer) ? "(empty — ICICI error page sends no-referrer)" : Model.referrer)</td></tr>
+    <tr><th>Raw query string</th><td style="word-break:break-all;">@(string.IsNullOrEmpty(Model.rawQuery) ? "(empty)" : Model.rawQuery)</td></tr>
+    <tr><th>Raw POST body</th><td style="word-break:break-all;">@(string.IsNullOrEmpty(Model.rawBody) ? "(empty)" : Model.rawBody)</td></tr>
+    @if (!string.IsNullOrEmpty(Model.exception))
+    {
+        <tr><th>Server exception</th><td style="color:red;">@Model.exception</td></tr>
+    }
+</table>
+
+<h4>All fields posted by ICICI</h4>
+@if (Model.fields == null || Model.fields.Count == 0)
+{
+    <p style="color:red;">No form or query fields were received.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped" style="max-width:900px;">
+        <tr><th>Column name</th><th>Value</th></tr>
+        @foreach (var item in Model.fields)
+        {
+            <tr>
+                <td>@item.Key</td>
+                <td style="word-break:break-all;">@item.Value</td>
+            </tr>
+        }
+    </table>
+}
+
+<p><a class="btn btn-primary" href="@Url.RouteUrl("BankAffApp")">Back to AffApp</a></p>

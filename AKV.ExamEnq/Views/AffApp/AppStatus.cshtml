@@ -1,0 +1,29 @@
+@model AKV.ExamEnq.Models.AffAppStatusVm
+@{
+    ViewBag.Title = "Application Status";
+}
+<img src="~/Logo/top2.jpg" alt="Annamalai University" class="aff-banner" style="width:100%;height:175px;object-fit:cover;display:block;margin-bottom:10px;" />
+<h4>Affiliated Exam Fee Application Status @Model.mthyr</h4>
+<hr />
+<table class="table table-bordered" style="max-width:720px;font-size:medium;">
+    <tr>
+        <th>Particulars</th>
+        <th style="text-align:right;width:140px;">Total</th>
+        <th style="text-align:right;width:160px;">Amount</th>
+    </tr>
+    <tr>
+        <td>Total ROLL (papers not null)</td>
+        <td style="text-align:right;">@Model.rollWithPapers</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Success ONLINE_ROLL_AFF for year @Model.mthyr</td>
+        <td style="text-align:right;">@Model.affYearSuccess</td>
+        <td style="text-align:right;">@Model.affYearSuccessAmount.ToString("N2")</td>
+    </tr>
+    <tr>
+        <td>Hall ticket (ROLL paid &gt; 0)</td>
+        <td style="text-align:right;">@Model.hallTicketPaid</td>
+        <td></td>
+    </tr>
+</table>

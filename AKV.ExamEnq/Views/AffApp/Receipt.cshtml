@@ -1,0 +1,73 @@
+@model AKV.ExamEnq.Models.AffAppReceiptVm
+@{
+    ViewBag.Title = "Bank Transaction";
+}
+<table width="750" style="border:ridge;margin:30px auto;">
+    <tr>
+        <td colspan="3" align="center">
+            <div style="color:red;font-size:x-large">Annamalai University</div>
+            <div style="color:blue;font-size:large">Exam Computer Wing</div>
+        </td>
+    </tr>
+    <tr>
+        <td>Roll/Reg No:</td>
+        <td>@Model.regno</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td>@Model.stname</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align:center;color:red">BANK TRANSACTION</td>
+    </tr>
+    <tr>
+        <td>Trans Reference No:</td>
+        <td>@Model.refno</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Bank Reference:</td>
+        <td>@Model.uniquerefnumber</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Date and Time:</td>
+        <td>@Model.transactiondate</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Trans Status:</td>
+        <td style="color:@(Model.isSuccess ? "green" : (Model.isPending ? "darkorange" : "red"))">
+            @(Model.isSuccess ? "Success" : (Model.isPending ? "Payment confirmation pending" : "Bank Transaction Failed"))
+            @if (!Model.isSuccess)
+            {
+                if (!string.IsNullOrEmpty(Model.responseCode))
+                {
+                    <div>Bank response code: @Model.responseCode</div>
+                }
+                else if (!string.IsNullOrEmpty(Model.message))
+                {
+                    <div>@Model.message</div>
+                }
+            }
+        </td>
+        <td>
+            @if (Model.isSuccess)
+            {
+                <a class="btn btn-danger" href="@Url.RouteUrl("BankAffAppActions", new { action = "Report" })">Press here to Download</a>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>Trans Amount:</td>
+        <td>@Model.transactionamount</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="3" style="background-color:darkkhaki;font-size:large">
+            Note: Please keep the printout/screen shot of this page for reference
+        </td>
+    </tr>
+</table>

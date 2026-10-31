@@ -1,0 +1,23 @@
+@model AKV.ExamEnq.Models.AffAppRedirectVm
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="unsafe-url" />
+    <title>ICICI eazypay</title>
+</head>
+<body onload="document.getElementById('eazypayForm').submit();">
+    <form id="eazypayForm" method="get" action="@(Model.Form != null ? Model.Form.ActionUrl : "")" accept-charset="utf-8" referrerpolicy="unsafe-url">
+        @if (Model.Form != null)
+        {
+            foreach (var field in Model.Form.Fields)
+            {
+                <input type="hidden" name="@field.Key" value="@field.Value" />
+            }
+        }
+    </form>
+</body>
+</html>

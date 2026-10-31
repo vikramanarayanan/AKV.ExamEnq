@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="unsafe-url" />
+    <title>@ViewBag.Title</title>
+    <link href="https://cdn.kendostatic.com/2021.3.1109/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.kendostatic.com/2021.3.1109/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1109/styles/kendo.blueopal.min.css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/jquery.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/jszip.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/kendo.all.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2021.3.1109/js/kendo.aspnetmvc.min.js"></script>
+</head>
+<body>
+    <div class="container body-content">
+        <script>
+            $(document).ready(function () { kendo.culture("en-GB"); });
+        </script>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
